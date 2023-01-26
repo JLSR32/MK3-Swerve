@@ -67,8 +67,6 @@ public class Limelight extends SubsystemBase {
     m_camera = new PhotonCamera("photonvision");
 
     camMode.setBoolean(false);
-
-    setMode(2);
   }
 
   public void shuffleUpdate()
@@ -118,13 +116,13 @@ public class Limelight extends SubsystemBase {
     switch(mode){
       case 0:
         //AprilTag long range
-        if(result.hasTargets() != true)
+        if(result.hasTargets())
         {
-          pipeline.setInteger(0);
+          pipeline.setInteger(2);
         }
         else
         {
-          pipeline.setInteger(2);
+          pipeline.setInteger(0);
         }
         break;
       case 1:
