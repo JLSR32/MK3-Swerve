@@ -25,11 +25,17 @@ import frc.robot.subsystems.Limelight;
  */
 public class RobotContainer {
   // The robot's subsystems and commands are defined here...
-   private final DrivetrainSubsystem m_drivetrainSubsystem = new DrivetrainSubsystem();
-   private final Limelight m_lime = new Limelight();
+  //  private final DrivetrainSubsystem m_drivetrainSubsystem = new DrivetrainSubsystem();
+  //  private final Limelight m_lime = new Limelight();
 
-  private final Joystick RIGHT = new Joystick(0);
-  private final Joystick LEFT = new Joystick(1);  
+  // private final Joystick RIGHT = new Joystick(0);
+  // private final Joystick LEFT = new Joystick(1);  
+
+  // private final DrivetrainSubsystem m_drivetrainSubsystem = new DrivetrainSubsystem();
+  // private final Limelight m_lime = new Limelight();
+
+  // private final Joystick RIGHT = new Joystick(1);
+  // private final Joystick LEFT = new Joystick(0);
 
   public RobotContainer() {
     // Set up the default command for the drivetrain.
@@ -38,11 +44,11 @@ public class RobotContainer {
     // Left stick X axis -> left and right movement
     // Right stick X axis -> rotation
     modifyAxis(0);
-    m_drivetrainSubsystem.setDefaultCommand(new DefaultDriveCommand(
-        m_drivetrainSubsystem,
-        ()-> -RIGHT.getY() * DrivetrainSubsystem.MAX_VELOCITY_METERS_PER_SECOND,
-        ()-> -RIGHT.getX() * DrivetrainSubsystem.MAX_VELOCITY_METERS_PER_SECOND,
-        ()-> -RIGHT.getZ() * DrivetrainSubsystem.MAX_ANGULAR_VELOCITY_RADIANS_PER_SECOND));
+    // m_drivetrainSubsystem.setDefaultCommand(new DefaultDriveCommand(
+    //     m_drivetrainSubsystem,
+    //     ()-> -LEFT.getY() * DrivetrainSubsystem.MAX_VELOCITY_METERS_PER_SECOND,
+    //     ()-> -LEFT.getX() * DrivetrainSubsystem.MAX_VELOCITY_METERS_PER_SECOND,
+    //     ()-> -RIGHT.getZ() * DrivetrainSubsystem.MAX_ANGULAR_VELOCITY_RADIANS_PER_SECOND));
       
     // Configure the button bindings
     configureButtonBindings();
@@ -59,14 +65,27 @@ public class RobotContainer {
   private void configureButtonBindings() {
     //Vison: 
     //AprilTag Auto
-    new JoystickButton(LEFT, 3).onTrue(new InstantCommand(()-> m_lime.setMode(0)));
-    //Limelight Pipeline
-    new JoystickButton(LEFT, 2).onTrue(new InstantCommand(()-> m_lime.setMode(1)));
-    //Processing
-    new JoystickButton(LEFT, 1).onTrue(new InstantCommand(()-> m_lime.setMode(2)));
+    // new JoystickButton(LEFT, 3).onTrue(new InstantCommand(()-> m_lime.setMode(0)));
+    // //Limelight Pipeline
+    // new JoystickButton(LEFT, 2).onTrue(new InstantCommand(()-> m_lime.setMode(1)));
+    // //Processing
+    // new JoystickButton(LEFT, 1).onTrue(new InstantCommand(()-> m_lime.setMode(2)));
     // Back button zeros the gyroscope
     // new JoystickButton(RIGHT, 1).onTrue(new InstantCommand(m_drivetrainSubsystem::zeroGyroscope));
-      
+
+
+
+
+    //AprilTag Long Pange Pipeline
+    // new JoystickButton(LEFT, 4).onTrue(new InstantCommand(()-> m_lime.setMode(0)));
+    // //Limelight Pipeline
+    // new JoystickButton(LEFT, 2).onTrue(new InstantCommand(()-> m_lime.setMode(1)));
+    // //AprilTag Short Range Pipeline
+    // new JoystickButton(LEFT, 3).onTrue(new InstantCommand(()-> m_lime.setMode(2)));
+    // //Processing
+    // new JoystickButton(LEFT, 1).onTrue(new InstantCommand(()-> m_lime.setMode(3)));
+    // Back button zeros the gyroscope
+    // new JoystickButton(RIGHT, 1).onTrue(new InstantCommand(m_drivetrainSubsystem::zeroGyroscope));
   }
 
   /**
