@@ -48,25 +48,6 @@ public class Limelight extends SubsystemBase {
   private double poseAmbiguity;
   private int targetID;
 
-
-  private List<PhotonTrackedTarget> targets;
-  private PhotonTrackedTarget target;
-
-  private double yaw;
-  private double pitch;
-  private double area;
-  private double poseAmbiguity;
-
-  private int targetID;
-
-  private Transform3d bestCameraToTarget;
-  private Transform3d alternateCameraToTarget;
-
-  private double rangeToTarget; 
-  private double distanceToTarget;
-
-
-
   private Transform3d bestCameraToTarget;
   private Transform3d alternateCameraToTarget;
   private double rangeToTarget; 
@@ -81,7 +62,6 @@ public class Limelight extends SubsystemBase {
   // AprilTagFieldLayout aprilTagFieldLayout = new
   // AprilTagFieldLayout(AprilTagFieldLayout.loadFromResource
   // (AprilTagFields.k2022RapidReact.m_resourceFile));
-  private final HttpCamera feed;
 
   private final PhotonCamera m_camera;
 
@@ -92,11 +72,9 @@ public class Limelight extends SubsystemBase {
     CameraServer.startAutomaticCapture(feed);
 
     m_camera = new PhotonCamera("photonvision");
-<<<<<<< HEAD
 
     camMode.setBoolean(false);
-=======
->>>>>>> b689ececb47f3442479b1ec0be1f95e9b14bcfc4
+
   }
 
   public void shuffleUpdate()
@@ -106,10 +84,6 @@ public class Limelight extends SubsystemBase {
 
   }
 
-  public void aprilTagData() {
-    result.hasTargets();
-
-  }
 
   public void turnToTarget()
   {
@@ -149,7 +123,7 @@ public class Limelight extends SubsystemBase {
     
     //Translation2d
     translation = PhotonUtils.estimateCameraToTargetTranslation(
-                  Constants.TEST_TARGET_HEIGHT_METERS, 
+                  CameraConstants.TEST_TARGET_HEIGHT_METERS, 
                   Rotation2d.fromDegrees(-target.getYaw()));
 
   //robotPose = PhotonUtils.estimateFieldToRobotAprilTag(
@@ -165,7 +139,7 @@ public class Limelight extends SubsystemBase {
     //                                 target.getBestCameraToTarget(), 
     //                                 AprilTagFieldLayout.getTagPose(target.getFiducialId()), 
     //                                 alternateCameraToTarget);
- }
+ 
 
 
   public void setMode(int mode)
@@ -173,43 +147,21 @@ public class Limelight extends SubsystemBase {
     switch(mode){
       case 0:
         //AprilTag long range
-<<<<<<< HEAD
-        if(result.hasTargets())
-=======
+        
+        pipeline.setInteger(2);
 
-        if(result.hasTargets() != true)
->>>>>>> b689ececb47f3442479b1ec0be1f95e9b14bcfc4
-        {
-          pipeline.setInteger(2);
-        }
-        else
-        {
+        if(result.hasTargets())
           pipeline.setInteger(0);
-        }
-        break;
+
+      break;
       case 1:
         //Reflective Tape //long range ?
         pipeline.setInteger(1);
-        break;
+      break;
       case 2:
         //Processing
         pipeline.setInteger(3);
-        break;
-
-        pipeline.setInteger(0);
-        break;
-      case 1:
-        //Reflective Tape //long range ? 
-        pipeline.setInteger(1);
-        break;
-      case 2:
-        //AprilTag short range
-        pipeline.setInteger(2);
-        break;
-      case 3:
-        //Processing
-        pipeline.setInteger(3);
-        break;
+      break;
 
     }
   }
